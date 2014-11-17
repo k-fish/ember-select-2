@@ -34,6 +34,7 @@ var Select2Component = Ember.Component.extend({
   optionValuePath: null,
   optionLabelPath: 'text',
   optionDescriptionPath: 'description',
+  showSearch: false,
   placeholder: null,
   multiple: false,
   allowClear: false,
@@ -61,7 +62,11 @@ var Select2Component = Ember.Component.extend({
     options.placeholder = this.get('placeholder');
     options.multiple = this.get('multiple');
     options.allowClear = this.get('allowClear');
-
+    
+    if (!this.get('showSearch')) {
+      options.minimumResultsForSearch = -1; 
+    }
+    
     // allowClear is only allowed with placeholder
     Ember.assert("To use allowClear, you have to specify a placeholder", !options.allowClear || options.placeholder);
 
